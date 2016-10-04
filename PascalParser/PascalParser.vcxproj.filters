@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\GoldCPP">
+      <UniqueIdentifier>{0354b146-a764-4d93-abbb-e791748da4ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GoldCPP">
+      <UniqueIdentifier>{e8fa4107-9332-4961-8e59-995c13a05d82}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="GoldCPP\CharacterRange.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\CharacterSet.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\EGT.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\FaEdge.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\FaState.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\Group.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\LrState.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\MIMParser.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\Parser.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\Position.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\Production.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\Reduction.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\String.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\Symbol.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\Token.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldCPP\Vector.h">
+      <Filter>Header Files\GoldCPP</Filter>
+    </ClInclude>
+    <ClInclude Include="constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PascalParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GoldCPP\CharacterSet.cpp">
+      <Filter>Source Files\GoldCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="GoldCPP\EGT.cpp">
+      <Filter>Source Files\GoldCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="GoldCPP\LrState.cpp">
+      <Filter>Source Files\GoldCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="GoldCPP\MIMParser.cpp">
+      <Filter>Source Files\GoldCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="GoldCPP\Parser.cpp">
+      <Filter>Source Files\GoldCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="GoldCPP\Symbol.cpp">
+      <Filter>Source Files\GoldCPP</Filter>
+    </ClCompile>
+    <ClCompile Include="reduce.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pascal.egt" />
+  </ItemGroup>
+</Project>
