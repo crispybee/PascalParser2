@@ -166,6 +166,7 @@
     <ClInclude Include="GoldCPP\Symbol.h" />
     <ClInclude Include="GoldCPP\Token.h" />
     <ClInclude Include="GoldCPP\Vector.h" />
+    <ClInclude Include="helperUtility.h" />
     <ClInclude Include="QuadrupleSpace.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SymbolTable.h" />
@@ -178,6 +179,7 @@
     <ClCompile Include="GoldCPP\MIMParser.cpp" />
     <ClCompile Include="GoldCPP\Parser.cpp" />
     <ClCompile Include="GoldCPP\Symbol.cpp" />
+    <ClCompile Include="helperUtility.cpp" />
     <ClCompile Include="PascalParser.cpp" />
     <ClCompile Include="QuadrupleSpace.cpp" />
     <ClCompile Include="reduce.cpp" />
