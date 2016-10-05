@@ -21,7 +21,7 @@ namespace GoldCPP{
 				cout << "Symboltabelle" << endl;
 				cout << "--------------------------" << endl;
 
-				for (int i = 0; i < 27; i++)
+				for (int i = 0; i < 43; i++)
 				{
 					cout << to_string(i) << "\t";
 
@@ -36,7 +36,7 @@ namespace GoldCPP{
 				cout << "Quadrupeltabelle" << endl;
 				cout << "--------------------------" << endl;
 
-				for (int i = 0; i < 17; i++)
+				for (int i = 0; i < 33; i++)
 				{
 					for (int j = 0; j < 4; j++)
 					{
