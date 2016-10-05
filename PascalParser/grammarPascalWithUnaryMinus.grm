@@ -1,0 +1,73 @@
+! Welcome to GOLD Parser Builder 5.2
+"Case Sensitive" = false
+"Start Symbol" = <Program>
+
+variable = {Letter}{AlphaNumeric}*
+konstante = {Number}+('.'{Number}+)?
+
+<Program> ::= 'program' variable ';' <Deklarationsteil> <Anweisungsteil>
+<Deklarationsteil> ::= <Deklarationsteil> <Varblock>
+<Deklarationsteil> ::= <Varblock>
+<Varblock> ::= 'var' <Deklarationslisten>
+<Deklarationslisten> ::= <Deklarationslisten> <Deklarationsliste>
+
+<Deklarationslisten> ::= <Deklarationsliste>
+
+<Deklarationsliste> ::= variable ',' <Deklarationsliste>
+<Deklarationsliste> ::= variable ':' <Typ> ';'
+
+<Typ> ::= 'integer'
+<Typ> ::= 'real'
+
+<Anweisungsteil> ::= 'begin' <Anweisungen> ';' 'end.'
+
+<Anweisungen> ::= <Anweisungen> ';' <Anweisung>
+<Anweisungen> ::= <Anweisung>
+
+<Anweisung> ::= <Zuweisung>
+<Anweisung> ::= <if-Anweisung>
+<Anweisung> ::= <if-else-Anweisung>
+<Anweisung> ::= <while-Anweisung>
+<Anweisung> ::= <repeat-Anweisung>
+<Anweisung> ::= <for-Anweisung>
+<Anweisung> ::= 'begin' <Anweisungen> ';' 'end'
+
+
+<Zuweisung> ::= variable ':=' <Ausdruck>
+
+<Ausdruck> ::= <Ausdruck> '=' <pm-Term>
+<Ausdruck> ::= <Ausdruck> '<' <pm-Term>
+<Ausdruck> ::= <Ausdruck> '>' <pm-Term>
+<Ausdruck> ::= <pm-Term>
+
+<pm-Term> ::= <pm-Term> '+' <md-Term>
+<pm-Term> ::= <pm-Term> '-' <md-Term>
+<pm-Term> ::= '-' <md-Term>
+<pm-Term> ::= <md-Term>
+
+<md-Term> ::= <md-Term> '*' <pot-Term>
+<md-Term> ::= <md-Term> '/' <pot-Term>
+<md-Term> ::= <pot-Term>
+
+<pot-Term> ::= <Faktor> '^' <pot-Term>
+<pot-Term> ::= <Faktor>
+
+<Faktor> ::= konstante
+<Faktor> ::= variable
+<Faktor> ::= '(' <Ausdruck> ')'
+
+<if-Anweisung> ::= <if-Anfang> <Anweisung>
+<if-Anfang> ::= 'if' <Ausdruck> 'then'
+
+<if-else-Mitte> ::= <if-Anfang> <Anweisung> 'else'
+<if-else-Anweisung> ::= <if-else-Mitte> <Anweisung>
+
+<while-Anfang> ::= 'while'
+<while-Mitte> ::= <while-Anfang> <Ausdruck> 'do'
+<while-Anweisung> ::= <while-Mitte> <Anweisung>
+
+<repeat-Anfang> ::= 'repeat'
+<repeat-Anweisung> ::= <repeat-Anfang> <Anweisungen> ';' 'until' <Ausdruck>
+
+<for-Anfang> ::= 'for' <Zuweisung> 'to' <Ausdruck> 'do'
+<for-Anweisung> ::= <for-Anfang> <Anweisung>

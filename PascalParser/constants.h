@@ -39,26 +39,27 @@ namespace GoldCPP{
 		PROD_AUSDRUCK                              = 24, // <Ausdruck> ::= <pm-Term>
 		PROD_PMTERM_PLUS                           = 25, // <pm-Term> ::= <pm-Term> '+' <md-Term>
 		PROD_PMTERM_MINUS                          = 26, // <pm-Term> ::= <pm-Term> '-' <md-Term>
-		PROD_PMTERM                                = 27, // <pm-Term> ::= <md-Term>
-		PROD_MDTERM_TIMES                          = 28, // <md-Term> ::= <md-Term> '*' <pot-Term>
-		PROD_MDTERM_DIV                            = 29, // <md-Term> ::= <md-Term> '/' <pot-Term>
-		PROD_MDTERM                                = 30, // <md-Term> ::= <pot-Term>
-		PROD_POTTERM_CARET                         = 31, // <pot-Term> ::= <Faktor> '^' <pot-Term>
-		PROD_POTTERM                               = 32, // <pot-Term> ::= <Faktor>
-		PROD_FAKTOR_KONSTANTE                      = 33, // <Faktor> ::= konstante
-		PROD_FAKTOR_VARIABLE                       = 34, // <Faktor> ::= variable
-		PROD_FAKTOR_LPAREN_RPAREN                  = 35, // <Faktor> ::= '(' <Ausdruck> ')'
-		PROD_IFANWEISUNG                           = 36, // <if-Anweisung> ::= <if-Anfang> <Anweisung>
-		PROD_IFANFANG_IF_THEN                      = 37, // <if-Anfang> ::= if <Ausdruck> then
-		PROD_IFELSEMITTE_ELSE                      = 38, // <if-else-Mitte> ::= <if-Anfang> <Anweisung> else
-		PROD_IFELSEANWEISUNG                       = 39, // <if-else-Anweisung> ::= <if-else-Mitte> <Anweisung>
-		PROD_WHILEANFANG_WHILE                     = 40, // <while-Anfang> ::= while
-		PROD_WHILEMITTE_DO                         = 41, // <while-Mitte> ::= <while-Anfang> <Ausdruck> do
-		PROD_WHILEANWEISUNG                        = 42, // <while-Anweisung> ::= <while-Mitte> <Anweisung>
-		PROD_REPEATANFANG_REPEAT                   = 43, // <repeat-Anfang> ::= repeat
-		PROD_REPEATANWEISUNG_SEMI_UNTIL            = 44, // <repeat-Anweisung> ::= <repeat-Anfang> <Anweisungen> ';' until <Ausdruck>
-		PROD_FORANFANG_FOR_TO_DO                   = 45, // <for-Anfang> ::= for <Zuweisung> to <Ausdruck> do
-		PROD_FORANWEISUNG                          = 46  // <for-Anweisung> ::= <for-Anfang> <Anweisung>
+		PROD_PMTERM_MINUS2                         = 27, // <pm-Term> ::= '-' <md-Term>
+		PROD_PMTERM                                = 28, // <pm-Term> ::= <md-Term>
+		PROD_MDTERM_TIMES                          = 29, // <md-Term> ::= <md-Term> '*' <pot-Term>
+		PROD_MDTERM_DIV                            = 30, // <md-Term> ::= <md-Term> '/' <pot-Term>
+		PROD_MDTERM                                = 31, // <md-Term> ::= <pot-Term>
+		PROD_POTTERM_CARET                         = 32, // <pot-Term> ::= <Faktor> '^' <pot-Term>
+		PROD_POTTERM                               = 33, // <pot-Term> ::= <Faktor>
+		PROD_FAKTOR_KONSTANTE                      = 34, // <Faktor> ::= konstante
+		PROD_FAKTOR_VARIABLE                       = 35, // <Faktor> ::= variable
+		PROD_FAKTOR_LPAREN_RPAREN                  = 36, // <Faktor> ::= '(' <Ausdruck> ')'
+		PROD_IFANWEISUNG                           = 37, // <if-Anweisung> ::= <if-Anfang> <Anweisung>
+		PROD_IFANFANG_IF_THEN                      = 38, // <if-Anfang> ::= if <Ausdruck> then
+		PROD_IFELSEMITTE_ELSE                      = 39, // <if-else-Mitte> ::= <if-Anfang> <Anweisung> else
+		PROD_IFELSEANWEISUNG                       = 40, // <if-else-Anweisung> ::= <if-else-Mitte> <Anweisung>
+		PROD_WHILEANFANG_WHILE                     = 41, // <while-Anfang> ::= while
+		PROD_WHILEMITTE_DO                         = 42, // <while-Mitte> ::= <while-Anfang> <Ausdruck> do
+		PROD_WHILEANWEISUNG                        = 43, // <while-Anweisung> ::= <while-Mitte> <Anweisung>
+		PROD_REPEATANFANG_REPEAT                   = 44, // <repeat-Anfang> ::= repeat
+		PROD_REPEATANWEISUNG_SEMI_UNTIL            = 45, // <repeat-Anweisung> ::= <repeat-Anfang> <Anweisungen> ';' until <Ausdruck>
+		PROD_FORANFANG_FOR_TO_DO                   = 46, // <for-Anfang> ::= for <Zuweisung> to <Ausdruck> do
+		PROD_FORANWEISUNG                          = 47  // <for-Anweisung> ::= <for-Anfang> <Anweisung>
 	};
 }
 	

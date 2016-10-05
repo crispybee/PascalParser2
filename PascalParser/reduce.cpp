@@ -176,6 +176,23 @@ namespace GoldCPP{
 				reduction->adresse = addresseHilfsvariable;
 			}
 			break;
+			// <pm-Term> ::= '-' <md-Term>
+			case PROD_PMTERM_MINUS2:
+			{
+				int adresse1 = elementFromProduction(1)->ReductionData->adresse;
+
+				string typeOfAdresse1 = symbolTable.table[adresse1][2];
+
+				int addresseHilfsvariable = symbolTable.addNextEntry(
+					"",
+					"HVar",
+					helperUtility::returnVariableType(typeOfAdresse1),
+					"");
+
+				quadrupleSpace.addNextEntry("NEG", adresse1, -1, addresseHilfsvariable);
+				reduction->adresse = addresseHilfsvariable;
+			}
+			break;
 			// <pm-Term> ::= <md-Term>
 			case PROD_PMTERM: 
 				reduction->adresse = elementFromProduction(0)->ReductionData->adresse;
