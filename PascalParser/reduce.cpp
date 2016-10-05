@@ -78,9 +78,11 @@ namespace GoldCPP{
 			break;
 			// <Typ> ::= integer
 			case PROD_TYP_INTEGER: 
+				reduction->typ = "integer";
 			break;
 			// <Typ> ::= real
 			case PROD_TYP_REAL: 
+				reduction->typ = "real";
 			break;
 			// <Anweisungsteil> ::= begin <Anweisungen> ';' 'end.'
 			case PROD_ANWEISUNGSTEIL_BEGIN_SEMI_ENDDOT: 
@@ -176,6 +178,7 @@ namespace GoldCPP{
 			break;
 			// <pm-Term> ::= <md-Term>
 			case PROD_PMTERM: 
+				reduction->adresse = elementFromProduction(0)->ReductionData->adresse;
 			break;
 			// <md-Term> ::= <md-Term> '*' <pot-Term>
 			case PROD_MDTERM_TIMES: 
