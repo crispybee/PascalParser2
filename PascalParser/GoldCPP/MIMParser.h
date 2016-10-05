@@ -38,6 +38,8 @@ namespace GoldCPP
   private:
     Parser *parser_;	
 	//Anzupassen: Deklaration von Symboltabelle und Quadruppelbereich
+	SymbolTable symbolTable;
+	QuadrupleSpace quadrupleSpace;
 #ifndef __GNUC__
     MIMParser(const MIMParser& that){}
 #else

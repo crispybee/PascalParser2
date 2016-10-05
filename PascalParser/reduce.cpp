@@ -3,7 +3,8 @@
 #include "GoldCPP\MIMParser.h"
 #include "GoldCPP\Parser.h"
 #include "constants.h"
-
+#include "helperUtility.h"
+#
 #ifdef __GNUC__
 #define UNUSED __attribute__ ((unused))
 #else
@@ -16,6 +17,35 @@ namespace GoldCPP{
 		switch(reduction->Parent->TableIndex){
 			// <Program> ::= program variable ';' <Deklarationsteil> <Anweisungsteil>
 			case PROD_PROGRAM_PROGRAM_VARIABLE_SEMI: 
+			{
+				cout << "Symboltabelle" << endl;
+				cout << "--------------------------" << endl;
+
+				for (int i = 0; i < 27; i++)
+				{
+					cout << to_string(i) << "\t";
+
+					for (int j = 0; j < 4; j++)
+					{
+						cout << symbolTable.table[i][j] << "\t";
+					}
+
+					cout << endl;
+				}
+
+				cout << "Quadrupeltabelle" << endl;
+				cout << "--------------------------" << endl;
+
+				for (int i = 0; i < 17; i++)
+				{
+					for (int j = 0; j < 4; j++)
+					{
+						cout << quadrupleSpace.quadrupleTable[i][j] << "\t";
+					}
+
+					cout << endl;
+				}
+			}
 			break;
 			// <Deklarationsteil> ::= <Deklarationsteil> <Varblock>
 			case PROD_DEKLARATIONSTEIL: 
@@ -34,9 +64,17 @@ namespace GoldCPP{
 			break;
 			// <Deklarationsliste> ::= variable ',' <Deklarationsliste>
 			case PROD_DEKLARATIONSLISTE_VARIABLE_COMMA: 
+			{
+				symbolTable.addNextEntry(elementFromProduction(0)->GetStringData(), "variable", elementFromProduction(2)->ReductionData->typ, "");
+				reduction->typ = elementFromProduction(2)->ReductionData->typ;
+			}
 			break;
 			// <Deklarationsliste> ::= variable ':' <Typ> ';'
 			case PROD_DEKLARATIONSLISTE_VARIABLE_COLON_SEMI: 
+			{
+				symbolTable.addNextEntry(elementFromProduction(0)->GetStringData(), "variable", elementFromProduction(2)->ReductionData->typ, "");
+				reduction->typ = elementFromProduction(2)->ReductionData->typ;
+			}
 			break;
 			// <Typ> ::= integer
 			case PROD_TYP_INTEGER: 
@@ -76,6 +114,14 @@ namespace GoldCPP{
 			break;
 			// <Zuweisung> ::= variable ':=' <Ausdruck>
 			case PROD_ZUWEISUNG_VARIABLE_COLONEQ: 
+			{
+				string variable_name = elementFromProduction(0)->GetStringData();
+				int adresse2 = elementFromProduction(2)->ReductionData->adresse;
+				int index = symbolTable.getIndexFromVariable(variable_name);
+
+				reduction->adresse = index;
+				quadrupleSpace.addNextEntry("IS", adresse2, -1, index);
+			}
 			break;
 			// <Ausdruck> ::= <Ausdruck> '=' <pm-Term>
 			case PROD_AUSDRUCK_EQ: 
@@ -88,39 +134,131 @@ namespace GoldCPP{
 			break;
 			// <Ausdruck> ::= <pm-Term>
 			case PROD_AUSDRUCK: 
+				reduction->adresse = elementFromProduction(0)->ReductionData->adresse;
 			break;
 			// <pm-Term> ::= <pm-Term> '+' <md-Term>
 			case PROD_PMTERM_PLUS: 
+			{
+				int adresse1 = elementFromProduction(0)->ReductionData->adresse;
+				int adresse2 = elementFromProduction(2)->ReductionData->adresse;
+
+				string typeOfAdresse1 = symbolTable.table[adresse1][2];
+				string typeOfAdresse2 = symbolTable.table[adresse2][2];
+				
+				int addresseHilfsvariable = symbolTable.addNextEntry(
+					"",
+					"HVar",
+					helperUtility::getTypeForSymboltabelle(typeOfAdresse1, typeOfAdresse2),
+					"");
+
+				reduction->adresse = addresseHilfsvariable;
+				quadrupleSpace.addNextEntry("ADD", adresse1, adresse2, addresseHilfsvariable);
+			}
 			break;
 			// <pm-Term> ::= <pm-Term> '-' <md-Term>
 			case PROD_PMTERM_MINUS: 
+			{
+				int adresse1 = elementFromProduction(0)->ReductionData->adresse;
+				int adresse2 = elementFromProduction(2)->ReductionData->adresse;
+
+				string typeOfAdresse1 = symbolTable.table[adresse1][2];
+				string typeOfAdresse2 = symbolTable.table[adresse2][2];
+
+				int addresseHilfsvariable = symbolTable.addNextEntry(
+					"",
+					"HVar",
+					helperUtility::getTypeForSymboltabelle(typeOfAdresse1, typeOfAdresse2),
+					"");
+
+				quadrupleSpace.addNextEntry("SUB", adresse1, adresse2, addresseHilfsvariable);
+				reduction->adresse = addresseHilfsvariable;
+			}
 			break;
 			// <pm-Term> ::= <md-Term>
 			case PROD_PMTERM: 
 			break;
 			// <md-Term> ::= <md-Term> '*' <pot-Term>
 			case PROD_MDTERM_TIMES: 
+			{
+				int adresse1 = elementFromProduction(0)->ReductionData->adresse;
+				int adresse2 = elementFromProduction(2)->ReductionData->adresse;
+
+				string typeOfAdresse1 = symbolTable.table[adresse1][2];
+				string typeOfAdresse2 = symbolTable.table[adresse2][2];
+
+				int addresseHilfsvariable = symbolTable.addNextEntry(
+					"",
+					"HVar",
+					helperUtility::getTypeForSymboltabelle(typeOfAdresse1, typeOfAdresse2),
+					"");
+
+				quadrupleSpace.addNextEntry("MULT", adresse1, adresse2, addresseHilfsvariable);
+				reduction->adresse = addresseHilfsvariable;
+			}
 			break;
 			// <md-Term> ::= <md-Term> '/' <pot-Term>
 			case PROD_MDTERM_DIV: 
+			{
+				int adresse1 = elementFromProduction(0)->ReductionData->adresse;
+				int adresse2 = elementFromProduction(2)->ReductionData->adresse;
+
+				int addresseHilfsvariable = symbolTable.addNextEntry(
+					"",
+					"HVar",
+					"real",
+					"");
+
+				quadrupleSpace.addNextEntry("DIV", adresse1, adresse2, addresseHilfsvariable);
+				reduction->adresse = addresseHilfsvariable;
+			}
 			break;
 			// <md-Term> ::= <pot-Term>
 			case PROD_MDTERM: 
+				reduction->adresse = elementFromProduction(0)->ReductionData->adresse;
 			break;
 			// <pot-Term> ::= <Faktor> '^' <pot-Term>
 			case PROD_POTTERM_CARET: 
+			{
+				int adresse1 = elementFromProduction(0)->ReductionData->adresse;
+				int adresse2 = elementFromProduction(2)->ReductionData->adresse;
+
+				string typeOfAdresse1 = symbolTable.table[adresse1][2];
+				string typeOfAdresse2 = symbolTable.table[adresse2][2];
+
+				int addresseHilfsvariable = symbolTable.addNextEntry(
+					"",
+					"HVar",
+					helperUtility::getTypeForSymboltabelle(typeOfAdresse1, typeOfAdresse2),
+					"");
+
+				quadrupleSpace.addNextEntry("POT", adresse1, adresse2, addresseHilfsvariable);
+				reduction->adresse = addresseHilfsvariable;
+			}
 			break;
 			// <pot-Term> ::= <Faktor>
 			case PROD_POTTERM: 
+				reduction->adresse = elementFromProduction(0)->ReductionData->adresse;
 			break;
 			// <Faktor> ::= konstante
 			case PROD_FAKTOR_KONSTANTE: 
+			{
+				reduction->adresse = symbolTable.addNextEntry(
+					"",
+					"constant",
+					helperUtility::returnVariableType(elementFromProduction(0)->GetStringData()),
+					elementFromProduction(0)->GetStringData());
+			}
 			break;
 			// <Faktor> ::= variable
 			case PROD_FAKTOR_VARIABLE: 
+			{
+				int adresse = symbolTable.getIndexFromVariable(elementFromProduction(0)->GetStringData());
+				reduction->adresse = adresse;
+			}
 			break;
 			// <Faktor> ::= '(' <Ausdruck> ')'
 			case PROD_FAKTOR_LPAREN_RPAREN: 
+				reduction->adresse = elementFromProduction(1)->ReductionData->adresse;
 			break;
 			// <if-Anweisung> ::= <if-Anfang> <Anweisung>
 			case PROD_IFANWEISUNG: 

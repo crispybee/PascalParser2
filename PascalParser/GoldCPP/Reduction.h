@@ -13,6 +13,8 @@ namespace GoldCPP
     void *User;
 	
 	//hier muss erweitert werden
+	std::string typ;
+	int adresse;
 
     Reduction(size_t n) :
       Branches(n, NULL),
