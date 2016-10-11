@@ -15,6 +15,7 @@ namespace GoldCPP
 	//hier muss erweitert werden
 	std::string typ;
 	int adresse;
+	int labelAdresse;
 
     Reduction(size_t n) :
       Branches(n, NULL),

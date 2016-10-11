@@ -15,7 +15,6 @@ public:
 
 	std::string returnVariableType(std::string value);
 
-private:
 	int counter = 0;
 };
 

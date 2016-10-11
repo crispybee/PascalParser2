@@ -21,11 +21,11 @@ namespace GoldCPP{
 				cout << "Symboltabelle" << endl;
 				cout << "--------------------------" << endl;
 
-				for (int i = 0; i < 43; i++)
+				for (int i = 0; i < 70; i++)
 				{
 					cout << to_string(i) << "\t";
 
-					for (int j = 0; j < 4; j++)
+					for (int j = 0; j < 5; j++)
 					{
 						cout << symbolTable.table[i][j] << "\t";
 					}
@@ -36,8 +36,10 @@ namespace GoldCPP{
 				cout << "Quadrupeltabelle" << endl;
 				cout << "--------------------------" << endl;
 
-				for (int i = 0; i < 33; i++)
+				for (int i = 0; i < 50; i++)
 				{
+					cout << std::to_string(i + 1) << "\t";
+
 					for (int j = 0; j < 4; j++)
 					{
 						cout << quadrupleSpace.quadrupleTable[i][j] << "\t";
@@ -126,13 +128,61 @@ namespace GoldCPP{
 			}
 			break;
 			// <Ausdruck> ::= <Ausdruck> '=' <pm-Term>
-			case PROD_AUSDRUCK_EQ: 
+			case PROD_AUSDRUCK_EQ:
+				{
+					int adresse1 = elementFromProduction(0)->ReductionData->adresse;
+					int adresse2 = elementFromProduction(2)->ReductionData->adresse;
+
+					string typeOfAdresse1 = symbolTable.table[adresse1][2];
+					string typeOfAdresse2 = symbolTable.table[adresse2][2];
+
+					int addresseHilfsvariable = symbolTable.addNextEntry(
+						"",
+						"HVar",
+						"bool",
+						"");
+
+					reduction->adresse = addresseHilfsvariable;
+					quadrupleSpace.addNextEntry("=", adresse1, adresse2, addresseHilfsvariable);
+				}
 			break;
 			// <Ausdruck> ::= <Ausdruck> '<' <pm-Term>
 			case PROD_AUSDRUCK_LT: 
+			{
+				int adresse1 = elementFromProduction(0)->ReductionData->adresse;
+				int adresse2 = elementFromProduction(2)->ReductionData->adresse;
+
+				string typeOfAdresse1 = symbolTable.table[adresse1][2];
+				string typeOfAdresse2 = symbolTable.table[adresse2][2];
+
+				int addresseHilfsvariable = symbolTable.addNextEntry(
+					"",
+					"HVar",
+					"bool",
+					"");
+
+				reduction->adresse = addresseHilfsvariable;
+				quadrupleSpace.addNextEntry("<", adresse1, adresse2, addresseHilfsvariable);
+			}
 			break;
 			// <Ausdruck> ::= <Ausdruck> '>' <pm-Term>
 			case PROD_AUSDRUCK_GT: 
+			{
+				int adresse1 = elementFromProduction(0)->ReductionData->adresse;
+				int adresse2 = elementFromProduction(2)->ReductionData->adresse;
+
+				string typeOfAdresse1 = symbolTable.table[adresse1][2];
+				string typeOfAdresse2 = symbolTable.table[adresse2][2];
+
+				int addresseHilfsvariable = symbolTable.addNextEntry(
+					"",
+					"HVar",
+					"bool",
+					"");
+
+				reduction->adresse = addresseHilfsvariable;
+				quadrupleSpace.addNextEntry(">", adresse1, adresse2, addresseHilfsvariable);
+			}
 			break;
 			// <Ausdruck> ::= <pm-Term>
 			case PROD_AUSDRUCK: 
@@ -281,16 +331,35 @@ namespace GoldCPP{
 				reduction->adresse = elementFromProduction(1)->ReductionData->adresse;
 			break;
 			// <if-Anweisung> ::= <if-Anfang> <Anweisung>
-			case PROD_IFANWEISUNG: 
+			case PROD_IFANWEISUNG:
+				{
+					int address = elementFromProduction(0)->ReductionData->labelAdresse;					
+					symbolTable.table[address][4] = std::to_string(quadrupleSpace.counter + 1);
+				}
 			break;
 			// <if-Anfang> ::= if <Ausdruck> then
-			case PROD_IFANFANG_IF_THEN: 
+			case PROD_IFANFANG_IF_THEN:
+				{
+					int bedingung = elementFromProduction(1)->ReductionData->adresse;
+					int labelAddress = symbolTable.addNextEntry("", "LABEL", "", "", -1);
+					quadrupleSpace.addNextEntry("SF", labelAddress, bedingung, -1);
+					reduction->labelAdresse = labelAddress;
+				}
 			break;
 			// <if-else-Mitte> ::= <if-Anfang> <Anweisung> else
-			case PROD_IFELSEMITTE_ELSE: 
+			case PROD_IFELSEMITTE_ELSE:
+				{
+					/*
+					int labelAddress = elementFromProduction(0)->ReductionData->labelAdresse;
+					int newLabeLAddress = symbolTable.addNextEntry("", "LABEL", "", "", -1);
+					quadrupleSpace.addNextEntry("S", newLabeLAddress, -1, -1);
+					reduction->labelAdresse = newLabeLAddress;
+					*/
+				//quadrupleSpace.addNextEntry("SF", labelAddress)
+				}
 			break;
 			// <if-else-Anweisung> ::= <if-else-Mitte> <Anweisung>
-			case PROD_IFELSEANWEISUNG: 
+			case PROD_IFELSEANWEISUNG:
 			break;
 			// <while-Anfang> ::= while
 			case PROD_WHILEANFANG_WHILE: 
