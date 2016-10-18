@@ -16,6 +16,7 @@ namespace GoldCPP
 	std::string typ;
 	int adresse;
 	int labelAdresse;
+	int labelAdresse2;
 
     Reduction(size_t n) :
       Branches(n, NULL),

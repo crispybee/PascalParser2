@@ -9,7 +9,7 @@ public:
 	QuadrupleSpace();
 	~QuadrupleSpace();
 
-	std::string quadrupleTable[50][4];
+	std::string quadrupleTable[150][4];
 
 	void addNextEntry(std::string factor, int address1, int address2, int resultAddress);
 
