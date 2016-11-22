@@ -18,10 +18,12 @@ namespace GoldCPP {
 			// <Program> ::= program variable ';' <Deklarationsteil> <Anweisungsteil>
 		case PROD_PROGRAM_PROGRAM_VARIABLE_SEMI:
 		{
+			quadrupleSpace.addNextEntry("END", -1, -1, -1);
+
 			cout << "Symboltabelle" << endl;
 			cout << "--------------------------" << endl;
 
-			for (int i = 0; i < 70; i++)
+			for (int i = 0; i < 80; i++)
 			{
 				cout << to_string(i) << "\t";
 
@@ -36,7 +38,7 @@ namespace GoldCPP {
 			cout << "Quadrupeltabelle" << endl;
 			cout << "--------------------------" << endl;
 
-			for (int i = 0; i < 50; i++)
+			for (int i = 0; i < 60; i++)
 			{
 				cout << std::to_string(i + 1) << "\t";
 
@@ -143,7 +145,7 @@ namespace GoldCPP {
 				"");
 
 			reduction->adresse = addresseHilfsvariable;
-			quadrupleSpace.addNextEntry("=", adresse1, adresse2, addresseHilfsvariable);
+			quadrupleSpace.addNextEntry("IS", adresse1, adresse2, addresseHilfsvariable);
 		}
 		break;
 		// <Ausdruck> ::= <Ausdruck> '<' <pm-Term>
@@ -414,9 +416,35 @@ namespace GoldCPP {
 		break;
 		// <for-Anfang> ::= for <Zuweisung> to <Ausdruck> do
 		case PROD_FORANFANG_FOR_TO_DO:
+			{
+				int laufvariableAdresse = elementFromProduction(1)->ReductionData->adresse;
+				int ausdruckAdresse = elementFromProduction(3)->ReductionData->adresse;
+				int bedingung = symbolTable.addNextEntry("", "HVar", "bool", "");
+
+				// Label 2
+				int labelAdress2 = symbolTable.addNextEntry("", "LABEL", "", "", quadrupleSpace.counter + 1);
+
+				quadrupleSpace.addNextEntry(">", laufvariableAdresse, ausdruckAdresse, bedingung);
+
+				int labelAdress = symbolTable.addNextEntry("", "LABEL", "", "");
+				quadrupleSpace.addNextEntry("ST", labelAdress, bedingung, -1);
+
+				reduction->labelAdresse = labelAdress;
+				reduction->labelAdresse2 = labelAdress2;
+				reduction->adresse = laufvariableAdresse;
+			}
 			break;
 			// <for-Anweisung> ::= <for-Anfang> <Anweisung>
 		case PROD_FORANWEISUNG:
+			{
+				int labelAdress = elementFromProduction(0)->ReductionData->labelAdresse;
+				int labelAdress2 = elementFromProduction(0)->ReductionData->labelAdresse2;
+				int laufvariableAdresse = elementFromProduction(0)->ReductionData->adresse;
+
+				quadrupleSpace.addNextEntry("INC", laufvariableAdresse, -1, -1);
+				quadrupleSpace.addNextEntry("S", labelAdress2, -1, -1);
+				symbolTable.table[labelAdress][4] = std::to_string(quadrupleSpace.counter + 1);
+			}
 			break;
 		};
 		return reduction;
